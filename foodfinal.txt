@@ -1,0 +1,351 @@
+import pandas as pd
+import random
+
+flist = pd.read_excel('foodlist.xlsx')
+flist
+
+def option():
+    while True:
+        print("1.한식    2.일식    3.중식    4.양식    5.다이어트음식")
+        category = int(input("원하는 음식을 선택하세요(숫자로 입력) : "))
+        if category not in range(1, 6):
+            print("다시 선택하세요.\n\n")
+            continue
+        break
+    while True:
+        print("\n")
+        print("1.담백    2.매콤    3.달달    4.느끼")
+        flavor = int(input("원하는 맛을 선택하세요 : "))
+        if flavor not in range(1, 5):
+            print("다시 선택하세요.")
+            continue
+        break
+    while True:
+        print("\n")
+        print("1.만원 이하    2.1~2만원    3.2~3만원")
+        price = int(input("원하는 가격대를 선택하세요 : "))
+        if price not in range(1, 4):
+            print("다시 선택하세요.")
+            continue
+        break
+        
+    def recommendation():
+        category_korean = (flist['카테고리'] == '한식')
+        category_japanese = (flist['카테고리'] == '일식')
+        category_chinese = (flist['카테고리'] == '중식')
+        category_western = (flist['카테고리'] == '양식')
+        category_diet = (flist['카테고리'] == '다이어트음식')
+        flavor_normal = (flist['맛'] == '담백')
+        flavor_spicy = (flist['맛'] == '매콤')
+        flavor_sweet = (flist['맛'] == '달달')
+        flavor_oily = (flist['맛'] == '느끼')
+        price_one = (flist['가격'] == '만원 이하')
+        price_one2two = (flist['가격'] == '1~2')
+        price_two2three = (flist['가격'] == '2~3')
+        
+        recommend = []
+# 한식
+        if category == 1 and flavor == 1 and price == 1:
+            flist_all = flist[category_korean & flavor_normal & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 1 and price == 2:
+            flist_all = flist[category_korean & flavor_normal & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 1 and price == 3:
+            flist_all = flist[category_korean & flavor_normal & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 2 and price == 1:
+            flist_all = flist[category_korean & flavor_spicy & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 2 and price == 2:
+            flist_all = flist[category_korean & flavor_spicy & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 2 and price == 3:
+            flist_all = flist[category_korean & flavor_spicy & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 3 and price == 1:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 1 and flavor == 3 and price == 2:
+            flist_all = flist[category_korean & flavor_sweet & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 3 and price == 3:
+            flist_all = flist[category_korean & flavor_sweet & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 4 and price == 1:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 1 and flavor == 4 and price == 2:
+            flist_all = flist[category_korean & flavor_oily & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 1 and flavor == 4 and price == 3:
+            flist_all = flist[category_korean & flavor_oily & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+# 일식
+        elif category == 2 and flavor == 1 and price == 1:
+            flist_all = flist[category_japanese & flavor_normal & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 1 and price == 2:
+            flist_all = flist[category_japanese & flavor_normal & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 1 and price == 3:
+            flist_all = flist[category_japanese & flavor_normal & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 2 and price == 1:
+            flist_all = flist[category_japanese & flavor_spicy & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 2 and price == 2:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 2 and flavor == 2 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 2 and flavor == 3 and price == 1:
+            flist_all = flist[category_japanese & flavor_sweet & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 3 and price == 2:
+            flist_all = flist[category_japanese & flavor_sweet & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 3 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 2 and flavor == 4 and price == 1:
+            flist_all = flist[category_japanese & flavor_oily & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 4 and price == 2:
+            flist_all = flist[category_japanese & flavor_oily & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 2 and flavor == 4 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+# 중식
+        elif category == 3 and flavor == 1 and price == 1:
+            flist_all = flist[category_chinese & flavor_normal & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 1 and price == 2:
+            flist_all = flist[category_chinese & flavor_normal & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 1 and price == 3:
+            flist_all = flist[category_chinese & flavor_normal & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 2 and price == 1:
+            flist_all = flist[category_chinese & flavor_spicy & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 2 and price == 2:
+            flist_all = flist[category_chinese & flavor_spicy & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 2 and price == 3:
+            flist_all = flist[category_chinese & flavor_spicy & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 3 and price == 1:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 3 and flavor == 3 and price == 2:
+            flist_all = flist[category_chinese & flavor_sweet & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 3 and price == 3:
+            flist_all = flist[category_chinese & flavor_sweet & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 4 and price == 1:
+            flist_all = flist[category_chinese & flavor_oily & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 4 and price == 2:
+            flist_all = flist[category_chinese & flavor_oily & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 3 and flavor == 4 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+# 양식
+        elif category == 4 and flavor == 1 and price == 1:
+            flist_all = flist[category_western & flavor_normal & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 1 and price == 2:
+            flist_all = flist[category_western & flavor_normal & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 1 and price == 3:
+            flist_all = flist[category_western & flavor_normal & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 2 and price == 1:
+            flist_all = flist[category_western & flavor_spicy & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 2 and price == 2:
+            flist_all = flist[category_western & flavor_spicy & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 2 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 4 and flavor == 3 and price == 1:
+            flist_all = flist[category_western & flavor_sweet & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 3 and price == 2:
+            flist_all = flist[category_western & flavor_sweet & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 3 and price == 3:
+            flist_all = flist[category_western & flavor_sweet & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 4 and price == 1:
+            flist_all = flist[category_western & flavor_oily & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 4 and price == 2:
+            flist_all = flist[category_western & flavor_oily & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 4 and flavor == 4 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+# 다이어트음식
+        elif category == 5 and flavor == 1 and price == 1:
+            flist_all = flist[category_diet & flavor_normal & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 1 and price == 2:
+            flist_all = flist[category_diet & flavor_normal & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 1 and price == 3:
+            flist_all = flist[category_diet & flavor_normal & price_two2three]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 2 and price == 1:
+            flist_all = flist[category_diet & flavor_spicy & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 2 and price == 2:
+            flist_all = flist[category_diet & flavor_spicy & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 2 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 5 and flavor == 3 and price == 1:
+            flist_all = flist[category_diet & flavor_sweet & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 3 and price == 2:
+            flist_all = flist[category_diet & flavor_sweet & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 3 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        elif category == 5 and flavor == 4 and price == 1:
+            flist_all = flist[category_diet & flavor_oily & price_one]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 4 and price == 2:
+            flist_all = flist[category_diet & flavor_oily & price_one2two]
+            for k in flist_all['음식']:
+                recommend.append(k)
+            return(random.choice(recommend))
+        elif category == 5 and flavor == 4 and price == 3:
+            return("선택한 옵션에 모두 해당하는 음식이 없습니다.")
+        else:
+            pass
+    return(recommendation())
+
+
+result = option()
+
+while result == "선택한 옵션에 모두 해당하는 음식이 없습니다.":
+    print("\n선택한 옵션에 모두 해당하는 음식이 없습니다. 다시 추천합니다.\n")
+    result = option()
+
+print("\n")
+print(result)
+
+
+if result == "나베":
+    print("- 고기나 생선, 식용채소 등을, 요리용 냄비에 넣어 끓인 일본 요리")
+elif result == "규동":
+    print("- 소고기, 가쓰오부시, 양파, 파 따위로 만드는 일본식 소고기덮밥")
+elif result == "차슈동":
+    print("- 중국식 돼지고기 구이를 향신료와 간장에 절여구운 다음 덮밥 형태로 먹는 음식")
+elif result == "가라아게동":
+    print("- 가라아게+돈부리 = 닭고기나 생선을 기름에 튀여 토핑으로 얹은 덮밥요리")
+elif result == "텐동":
+    print("- 밥 위에 몇 가지 종류의 튀김을 올리고 단 덮밥 소스를 더한 요리")
+elif result == "오야꼬동":
+    print("- 달착지근한 국물에 조린 닭고기에다 계란을 풀어 넣어 익힌 후, 밥 위에 얹어 먹는 일본의 대표적 덮밥요리")
+elif result == "팔보채":
+    print("- 여러 가지 채소와 해물을 기름에 볶아 따끈하게 먹는 대표적인 중국 요리")
+elif result == "컬리플라워라이스(58kcal)":
+    print("- 식감이 쌀이랑 비슷하며 슈퍼푸드이자 저칼로리, 저탄수화물 식품인 HMR(가정식 대체식품)")
+elif result == "낫토":
+    print("- 콩을 낫토균을 이용해 발효시킨 일본 전통의 식품 ")
+elif result == "오코노미야키":
+    print("- 양배추, 달걀, 밀가루 등으로 반죽하고 겉에는 삼겹살을 3장 정도 붙여서 지지는 일본식 지짐")
+elif result == "부타동":
+    print("- 돼지고기를 밥 위에 올린 덮밥 요리")
+else:
+    pass
